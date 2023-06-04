@@ -4,27 +4,41 @@
 int main()
 {
 char cardName[3];
-printf("Enter the card name: ");
-scanf("%2s", cardName);
-int val = 0;
-int lowcard=0;
-int highcard=0;
-/* Check if the value is 3 to 6 */
-for(int i=0 ; i<8 ;i++)
-{
-	if(cardName[0]=='3'||cardName[0]=='5'||cardName[0]=='4'||cardName[0]=='6')
-	{
-		lowcard=lowcard+1;
-		printf("low card Count has gone up by %i\n",lowcard);
-	}
-/* Otherwise check if the card was 10, J, Q, or K */
-	else if(cardName[0]=='A'||cardName[0]=='J'||cardName[0]=='Q'||cardName[0]=='K')
-	{
-		highcard=highcard+1;
-		printf("high Count has gone down by %i\n",highcard);
+int count = 0;
+  while(cardName[0]!='X'){
+  /* evalutes the value of the card drawn*/
+    puts("Enter the cardname: ");
+    scanf("%2s", cardName);
+    int val = 0;
+    switch (cardName[0]){
+        case'J':
+        case'Q':
+        case'K':
+           val=10;
+           break;
+        case'A':
+           val=11;
+           break;
+        case'X':
+           continue; 
+        default:
+        val =atoi(cardName);
+/* error handling */
+        if(val<1 || val>10){
+           puts("wrong value pls select a card again!");
+           continue;
         }
-printf("hit me !!\n: ");
-scanf("%2s", cardName);
-}
-return 0;
+    }
+
+/* Check if the value is 3 to 6  and increament the count odds*/
+/* Otherwise check if the card was 10, J, Q, or K */
+     if((val>2) && (val<7)){
+          count++;
+     } else if(val==10){
+	  count--; 
+     }
+     
+     printf("The count is: %i\n",count);
+  }
+ return 0;
 }
